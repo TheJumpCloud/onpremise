@@ -7,7 +7,7 @@
 # -e BOOTSTRAP_ADMIN_USERNAME=myvalue \
 # -e BOOTSTRAP_ADMIN_PASSWORD=myvalue \
 # -e BOOTSTRAP_ADMIN_EMAIL=myvalue \
-# jumpcloud/sentry python bootstrap.py
+# jumpcloud/sentry python /etc/sentry/bootstrap.py
 
 # Bootstrap the Sentry environment
 from sentry.utils.runner import configure
