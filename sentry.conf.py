@@ -83,6 +83,10 @@ SENTRY_USE_BIG_INTS = True
 # and thus various UI optimizations should be enabled.
 SENTRY_SINGLE_ORGANIZATION = Bool(env('SENTRY_SINGLE_ORGANIZATION', True))
 
+SENTRY_PUBLIC = Bool(env('SENTRY_PUBLIC', True))
+
+SENTRY_ALLOW_ORIGIN = env('SENTRY_ALLOW_ORIGIN', None)
+
 #########
 # Redis #
 #########
@@ -235,10 +239,10 @@ if Bool(env('SENTRY_USE_SSL', False)):
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
-SENTRY_WEB_HOST = '0.0.0.0'
-SENTRY_WEB_PORT = 9000
+SENTRY_WEB_HOST = env('SENTRY_WEB_HOST', '0.0.0.0')
+SENTRY_WEB_PORT = env('SENTRY_WEB_PORT', 9000)
 SENTRY_WEB_OPTIONS = {
-    # 'workers': 3,  # the number of web workers
+    'workers': env('SENTRY_WEB_WORKERS', 3),  # the number of web workers
 }
 
 ###############
@@ -289,3 +293,15 @@ if 'SENTRY_RUNNING_UWSGI' not in os.environ and len(secret_key) < 32:
     print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
 SENTRY_OPTIONS['system.secret-key'] = secret_key
+
+##############
+# Github SSO #
+##############
+SENTRY_FEATURES['organizations:sso'] = Bool(env('SENTRY_SSO_ENABLE', False))
+GITHUB_APP_ID = Bool(env('SENTRY_GITHUB_APP_ID', ''))
+GITHUB_API_SECRET = Bool(env('SENTRY_GITHUB_API_SECRET', ''))
+
+if env('SENTRY_GITHUB_BASE_DOMAIN', None) is not None:
+    GITHUB_BASE_DOMAIN = env('SENTRY_GITHUB_BASE_DOMAIN')
+if env('SENTRY_GITHUB_API_DOMAIN', None) is not None:
+    GITHUB_API_DOMAIN = env('SENTRY_GITHUB_API_DOMAIN')
