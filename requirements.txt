@@ -1,1 +1,3 @@
 # Add plugins here
+sentry-slack # needs to be pinned eventually
+-e git://github.com/getsentry/sentry-auth-github.git@397a658129b781897f3a5c7d1e69590a3fa667b1#egg=sentry-auth-github

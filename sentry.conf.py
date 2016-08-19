@@ -299,7 +299,7 @@ SENTRY_OPTIONS['system.secret-key'] = secret_key
 ##############
 SENTRY_FEATURES['organizations:sso'] = Bool(env('SENTRY_SSO_ENABLE', False))
 
-if SENTRY_FEATURES['organizations:sso'] and env('SENTRY_GITHUB_APP_ID', None) is not None:
+if SENTRY_FEATURES['organizations:sso'] and env('SENTRY_GITHUB_APP_ID', None) is not None and env('SENTRY_GITHUB_APP_ID', None) is not '':
     GITHUB_APP_ID = env('SENTRY_GITHUB_APP_ID', None)
     GITHUB_API_SECRET = env('SENTRY_GITHUB_API_SECRET', None)
 
